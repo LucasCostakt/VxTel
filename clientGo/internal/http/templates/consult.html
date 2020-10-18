@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+</div>
+  <h1>VxTel Calculo de Chamada</h1><br>
+  </div>
+
+  <h3>Tabela de preços e destinos</h3>
+  <table border="1">
+    <tr>
+        <td>Origem</td>
+        <td>Destino</td>
+        <td>$/min</td>
+    </tr>
+    <tr>
+      <td>011</td>
+      <td>016</td>
+      <td>1.90</td>
+    </tr>
+    <tr>
+      <td>016</td>
+      <td>011</td>
+      <td>2.90</td>
+    </tr>
+    <tr>
+      <td>011</td>
+      <td>017</td>
+      <td>1.70</td>
+    </tr>
+    <tr>
+      <td>017</td>
+      <td>011</td>
+      <td>2.70</td>
+    </tr> 
+    <tr>
+      <td>011</td>
+      <td>018</td>
+      <td>0.90</td>
+    </tr>
+    <tr>
+      <td>018</td>
+      <td>011</td>
+      <td>1.90</td>
+    </tr>
+</table>
+  </div><br>
+  <div >
+  <form method="POST" action="/">    
+    <label>DDD de Partida</label>
+    <select id="start" name="start">
+      <option value="011">011</option>
+      <option value="016">016</option>
+      <option value="017">017</option>
+      <option value="018">018</option>
+    </select>
+    <label>DDD de Destino</label>
+    <select id="final" name="final">
+      <option value="011">011</option>
+      <option value="60">016</option>
+      <option value="017">017</option>
+      <option value="018">018</option>
+    </select>
+    <label>Tempo da ligação</label>
+    <input name="time" type="number" />
+    <label>Plano</label>
+    <select id="plano" name="plano">
+      <option value="30">Fale Mais 30</option>
+      <option value="60">Fale Mais 60</option>
+      <option value="120">Fale Mais 120</option>
+    </select>
+    <button type="submit" name="submit">Consultar</button>
+  </form>
+</div>
+ 
+</div>
+</body>
+</html>
