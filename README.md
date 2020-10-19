@@ -50,8 +50,13 @@ api
   |__internal     //Códigos de biblioteca que não podem ser usados por
   |   |           //aplicativos externos
   |   |
-  |   |__apirest    //Faz a lógica do api rest
-  |   |__store      //Contém as structs utilizadas
+  |   |__apirest   //Faz a lógica do api rest
+  |   |
+  |   |__store     //Contém as structs utilizadas
+  |   |
+  |   |__caltax    //Faz a lógica de calculo dos valores a serem pagos pelo cliente
+  |   |
+  |   |__archives  //Faz a leitura e conversão do arquivo em struct
 
 images //Imagens utilizada no README.md
 
@@ -63,7 +68,10 @@ clientGo
   |   |
   |   |__http    //Faz a lógica da interface do client
   |   |   |__templates //htmls utilizados para montar as pag. web
+  |   |
   |   |__store      //Contém as structs utilizadas
+  |   |
+  |   |__configs     //Contém a lógica das chamdas http para a api
 
 ```
 <br>
