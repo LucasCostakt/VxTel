@@ -1,24 +1,17 @@
 package http
 
 import (
-	"bytes"
-	"encoding/json"
-	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 	"text/template"
 
+	configs "github.com/Vortx-Test/clientGo/internal/configs"
 	store "github.com/Vortx-Test/clientGo/internal/store"
 )
 
 type httpServer struct {
 	http.Handler
-}
-
-type httpClient interface {
-	Do(req *http.Request) (*http.Response, error)
 }
 
 var templates *template.Template
@@ -72,7 +65,7 @@ func pageConsult(w http.ResponseWriter, r *http.Request) {
 		p.Plano = r.FormValue("plano")
 
 		//faz a consulta
-		response := RequestConsult(p)
+		response := configs.RequestConsult(p)
 
 		//executa o template passando a melhor rota
 		err := templates.ExecuteTemplate(w, "consult2.html", response)
@@ -82,59 +75,4 @@ func pageConsult(w http.ResponseWriter, r *http.Request) {
 	default:
 		w.WriteHeader(http.StatusNotFound)
 	}
-}
-
-func RequestConsult(p store.SendNumbers) store.GetNumbers {
-	return requestConsult(p, &http.Client{})
-}
-
-func requestConsult(p store.SendNumbers, client httpClient) store.GetNumbers {
-	g := store.GetNumbers{}
-
-	url := readEnv()
-
-	js, err := json.Marshal(p)
-	if err != nil {
-		log.Println("Json marshal error in requestConsult(), ", err)
-	}
-
-	request, err := NewRequest(http.MethodPost, url, js)
-	request.Header.Set("Content-Type", "application/json")
-	if err != nil {
-		log.Println("Request error in requestConsult(), ", err)
-	}
-
-	response, err := client.Do(request)
-	if err != nil {
-		log.Println("Response error in requestConsult(), ", err)
-	}
-
-	body, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		log.Println("Ioutil ReadAll error in requestConsult(), ", err)
-	}
-
-	err = json.Unmarshal(body, &g)
-	if err != nil {
-		log.Println("Json Unmarshal error in requestConsult(), ", err)
-	}
-
-	return g
-}
-
-func NewRequest(method string, url string, requestBody []byte) (*http.Request, error) {
-	request, err := http.NewRequest(method, url, bytes.NewBuffer(requestBody))
-	if err != nil {
-		log.Println("Request error NewRequest() ", err)
-		return nil, err
-	}
-	return request, err
-}
-
-func readEnv() string {
-	url := os.Getenv("URL")
-	if url == "" {
-		url = "err"
-	}
-	return url
 }
